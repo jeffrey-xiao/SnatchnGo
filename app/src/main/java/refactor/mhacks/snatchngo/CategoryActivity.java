@@ -25,7 +25,7 @@ import java.io.IOException;
  * Created by abc96_000 on 2016-02-20.
  */
 public class CategoryActivity extends ActionBarActivity {
-    public int count;
+
     public String[] Cat;
     ListView categoryChoice;
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +55,11 @@ public class CategoryActivity extends ActionBarActivity {
                                                           @Override
                                                           public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                                                               Log.d("debug", "reached 4");
-                                                              String mealString = (String) categoryChoice.getItemAtPosition(position);
+                                                              String catString = (String) categoryChoice.getItemAtPosition(position);
                                                               Log.d("debug", "reached 3");
                                                               Intent intent = new Intent(CategoryActivity.this, MealActivity.class);
-                                                              intent.putExtra("Meal", mealString);
-                                                              intent.putExtra("Location", location);
+                                                              intent.putExtra("Cat", catString);
+                                                              intent.putExtra("Location", location+"");
                                                               intent.putExtra("Name", lName);
                                                               startActivity(intent);
                                                           }

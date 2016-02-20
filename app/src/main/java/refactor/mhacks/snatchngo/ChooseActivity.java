@@ -41,7 +41,7 @@ public class ChooseActivity extends ActionBarActivity {
                     if (snapshot.child("locations/"+(i+1)+"/name").getValue()!=null) {
 
                         names[i]=(String) snapshot.child("locations/"+(i+1)+"/name").getValue();
-                        //Log.d("what the fuck",names[i+1]+" "+i);
+                        Log.d("what the fuck",names[i]+" "+i);
                     }
                     Log.d("debug","reached 1");
                 }
