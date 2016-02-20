@@ -41,11 +41,11 @@ public class ChooseActivity extends ActionBarActivity {
                     if (snapshot.child("locations/"+(i+1)+"/name").getValue()!=null) {
 
                         names[i]=(String) snapshot.child("locations/"+(i+1)+"/name").getValue();
-                        Log.d("what the fuck",names[i]+" "+i);
+                        //Log.d("what the fuck",names[i+1]+" "+i);
                     }
                     Log.d("debug","reached 1");
                 }
-                Log.d("debug",names[0]+" "+names[1]);
+                //Log.d("debug",names[0]+" "+names[1]);
                 locationChoice = (ListView) findViewById(R.id.locatChoices);
                 ArrayAdapter<String> adapterLocat = new ArrayAdapter<String>(ChooseActivity.this,android.R.layout.simple_list_item_1, android.R.id.text1, names);
                 locationChoice.setAdapter(adapterLocat);
