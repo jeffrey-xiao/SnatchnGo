@@ -18,6 +18,7 @@ public class ChooseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_activity);
         Firebase.setAndroidContext(this);
+        Firebase rootRef = new Firebase("https://snatch-and-go.firebaseio.com/web/data");
 
 
     }
