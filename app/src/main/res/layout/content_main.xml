@@ -17,7 +17,9 @@
         android:id="@+id/choose"
         android:layout_marginTop="98dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#f58a8a"
+        android:textColor="@android:color/black" />
 
     <Button
         android:layout_width="wrap_content"
@@ -26,7 +28,9 @@
         android:id="@+id/find"
         android:layout_marginTop="57dp"
         android:layout_below="@+id/orText"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#f58a8a"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:layout_width="wrap_content"
