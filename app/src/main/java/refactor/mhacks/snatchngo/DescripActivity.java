@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by abc96_000 on 2016-02-20.
@@ -34,7 +35,7 @@ public class DescripActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DescripActivity.this, ChooseActivity.class);
                 ///////////access firebase to add on to thing
-                new AlertDialog.Builder(DescripActivity.this).setTitle("Added to Cart").setMessage(meal+" has been added to your cart").setNeutralButton("Close", null).show();
+                Toast.makeText(DescripActivity.this, "Item Added to Cart.", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
