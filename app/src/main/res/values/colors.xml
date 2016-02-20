@@ -10,4 +10,5 @@
     <color name="foreground_material_light">#f84d4d</color>
     <color name="primary_text_material_light">#050000</color>
     <color name="primary_text_material_dark">#f7f3f3</color>
+    <color name="white">#ffffff</color>
 </resources>
