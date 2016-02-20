@@ -3,6 +3,7 @@ package refactor.mhacks.snatchngo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,6 +15,7 @@ public class ChooseActivity extends ActionBarActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_activity);
+
 
 
     }
