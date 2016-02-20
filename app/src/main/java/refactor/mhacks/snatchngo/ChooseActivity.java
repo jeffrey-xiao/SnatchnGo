@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -22,37 +23,51 @@ import com.firebase.client.ValueEventListener;
  * Created by abc96_000 on 2016-02-20.
  */
 public class ChooseActivity extends ActionBarActivity {
-    public String[] names = new String[] {"KFC","Dairy Queen","Jeffrey's Diner", "Salty Xiao", "Jeff Zero Xiao","Who the Fuck is Jeff Xiao"};
+    public String[] names;
     public int locationCount=0;
     public ListView locationChoice;
-    public Button moveOn;
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_activity);
-
-        locationChoice = (ListView) findViewById(R.id.locatChoices);
-        // Defined Array values to show in ListView
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-
-        ArrayAdapter<String> adapterLocat = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, names);
-
-        // Assign adapter to ListView
-        locationChoice.setAdapter(adapterLocat);
-        locationChoice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Firebase.setAndroidContext(this);
+        Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com");
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-               String locationString = (String) locationChoice.getItemAtPosition(position);
-                int locate = position;
-                Intent intent = new Intent(ChooseActivity.this, CategoryActivity.class);
-                intent.putExtra("Location",""+locate);
-                intent.putExtra("Name",locationString);
-                startActivity(intent);
+            public void onDataChange(DataSnapshot snapshot) {
+                int len = (int)snapshot.child("locations").getChildrenCount();
+                names = new String[len];
+
+                for (int i=0;i<len;i++){
+                    if (snapshot.child("locations/"+(i+1)+"/name").getValue()!=null) {
+
+                        names[i]=(String) snapshot.child("locations/"+(i+1)+"/name").getValue();
+                        Log.d("what the fuck",names[i]+" "+i);
+                    }
+                    Log.d("debug","reached 1");
+                }
+                Log.d("debug",names[0]+" "+names[1]);
+                locationChoice = (ListView) findViewById(R.id.locatChoices);
+                ArrayAdapter<String> adapterLocat = new ArrayAdapter<String>(ChooseActivity.this,android.R.layout.simple_list_item_1, android.R.id.text1, names);
+                locationChoice.setAdapter(adapterLocat);
+                Log.d("debug", "reached 2");
+                locationChoice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                          @Override
+                                                          public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                                                              Log.d("debug","reached 4");
+                                                              String locationString = (String) locationChoice.getItemAtPosition(position);
+                                                              Log.d("debug","reached 3");
+                                                              int locate = position;
+                                                              Intent intent = new Intent(ChooseActivity.this, CategoryActivity.class);
+                                                              intent.putExtra("Location", "" + locate);
+                                                              intent.putExtra("Name", locationString);
+                                                              startActivity(intent);
+                                                          }
+                                                      }
+                    );
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
 
