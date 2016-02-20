@@ -30,15 +30,6 @@ public class ChooseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_activity);
 
-        /*moveOn = (Button) findViewById(R.id.moveButton);
-        moveOn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ChooseActivity.this, CategoryActivity.class);
-                    startActivity(intent);
-                }
-            });
-*/
         locationChoice = (ListView) findViewById(R.id.locatChoices);
         // Defined Array values to show in ListView
 
@@ -56,8 +47,12 @@ public class ChooseActivity extends ActionBarActivity {
         locationChoice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                //genreString = (String) locationChoice.getItemAtPosition(position);
-                //genre = position;
+               String locationString = (String) locationChoice.getItemAtPosition(position);
+                int locate = position;
+                Intent intent = new Intent(ChooseActivity.this, CategoryActivity.class);
+                intent.putExtra("Location",""+locate);
+                intent.putExtra("Name",locationString);
+                startActivity(intent);
             }
         });
 
