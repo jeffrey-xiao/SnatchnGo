@@ -61,7 +61,7 @@ public class DescripActivity extends BaseActivity {
                 //Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com/locations/"+(location+1)+"/orders");
                 TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
                 final String number = tm.getLine1Number().substring(1);
-                final Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com/locations/"+(location+1)+"/orders");
+                final Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com/locations/"+(location+1)+"/pending");
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
@@ -74,6 +74,7 @@ public class DescripActivity extends BaseActivity {
                             Firebase reff = ref.child("" + number);
                             Firebase refff = reff.child("items");
                             refff.child(meal).setValue(false);
+                            reff.child("paid").setValue(false);
                             reff.child("phone_number").setValue("7343259651");
                         }
                         ref.removeEventListener(this);

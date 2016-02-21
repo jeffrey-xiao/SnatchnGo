@@ -1,4 +1,5 @@
 package refactor.mhacks.snatchngo;
+import com.firebase.client.ChildEventListener;
 import com.stripe.android.*;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,26 +40,37 @@ public class CartActivity extends BaseActivity {
     public int[] Location;
     public ListView mealChoice;
     public Button checkOut;
-
+    public SimpleDateFormat df;
+    public String formattedDate;
+    public EditText timeLeft;
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_activity);
         TextView t2 = (TextView) findViewById(R.id.titleCart);
         TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time =&gt; "+c.getTime());
+
+        df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        formattedDate = df.format(c.getTime());
+// Now formattedDate have current date/time
+        Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final String number = tm.getLine1Number().substring(1);
         Firebase.setAndroidContext(this);
         Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com/locations");
+
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot snapshot) {
                 TextView t = (TextView) findViewById(R.id.costTot);
                 int tot = 0;
                 for (int i = 0; i < snapshot.getChildrenCount(); i++) {
-                    if (snapshot.child("" + (i + 1)).child("orders").child("" + number).exists()) {
+                    if (snapshot.child("" + (i + 1)).child("pending").child("" + number).exists()) {
                         Log.d("ahlkawehg", "awjheglakwe");
-                        tot += snapshot.child("" + (i + 1)).child("orders").child("" + number).child("items").getChildrenCount();
+                        tot += snapshot.child("" + (i + 1)).child("pending").child("" + number).child("items").getChildrenCount();
                     }
                 }
                 Meal = new String[tot];
@@ -63,8 +78,8 @@ public class CartActivity extends BaseActivity {
                 double totalCost = 0;
                 int counter = 0;
                 for (int i = 0; i < snapshot.getChildrenCount(); i++) {
-                    if (snapshot.child("" + (i + 1)).child("orders").child("" + number).exists()) {
-                        for (DataSnapshot o : snapshot.child("" + (i + 1)).child("orders").child("" + number).child("items").getChildren()) {
+                    if (snapshot.child("" + (i + 1)).child("pending").child("" + number).exists()) {
+                        for (DataSnapshot o : snapshot.child("" + (i + 1)).child("pending").child("" + number).child("items").getChildren()) {
                             Meal[counter] = (String) o.getKey();
                             Location[counter] = i;
                             for (DataSnapshot k : snapshot.child("" + (i + 1)).child("categories").getChildren()) {
@@ -89,14 +104,14 @@ public class CartActivity extends BaseActivity {
                                                                   .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                                       @Override
                                                                       public void onClick(DialogInterface dialog, int which) {
-                                                                          Log.d("debug", "https://snatch-and-go.firebaseio.com/locations/" + (Location[POS] + 1) + "/orders/" + number + "/items");
-                                                                          Firebase REF = new Firebase("https://snatch-and-go.firebaseio.com/locations/"+(Location[POS]+1)+"/orders/"+number+"/items");
+                                                                          Log.d("debug", "https://snatch-and-go.firebaseio.com/locations/" + (Location[POS] + 1) + "/pending/" + number + "/items");
+                                                                          Firebase REF = new Firebase("https://snatch-and-go.firebaseio.com/locations/"+(Location[POS]+1)+"/pending/"+number+"/items");
                                                                           Map<String, Object> nickname = new HashMap<String, Object>();
 
 
                                                                           REF.child(Meal[POS]).setValue(null);
 
-                                                                          Log.d("debug","yess");
+                                                                          Log.d("debug", "yess");
                                                                           //Intent intent = new Intent(CartActivity.this,CartActivity.class);
                                                                           //setIntent(intent);
 
@@ -108,14 +123,36 @@ public class CartActivity extends BaseActivity {
                                                   }
                 );
                 t.setText("$" + Math.round(totalCost));
+                timeLeft = (EditText) findViewById(R.id.editText);
                 checkOut = (Button) findViewById(R.id.completeTransaction);
                 checkOut.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(CartActivity.this, "Purchase Successful", Toast.LENGTH_SHORT).show();
                         for (int i=0;i<snapshot.getChildrenCount();i++){
-                            Firebase REF = new Firebase("https://snatch-and-go.firebaseio.com/locations/" + (i+1) + "/orders/" + number);
-                            REF.setValue(null);
+                            final int ii=i;
+                            final Firebase REF = new Firebase("https://snatch-and-go.firebaseio.com/locations/" + (i+1) + "/pending/" + number);
+                            REF.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    Firebase REF2 = new Firebase("https://snatch-and-go.firebaseio.com/locations/" + (ii + 1) + "/orders/" + number);
+                                    REF2.setValue(snapshot.getValue());
+                                    REF2.child("paid").setValue(true);
+                                    formattedDate.replace(":","-");
+                                    formattedDate.replace(" ","-");
+                                    REF2.child("time_requested").setValue(formattedDate);
+                                    REF.setValue(null);
+                                    REF.removeEventListener(this);
+                                }
+
+                                @Override
+                                public void onCancelled(FirebaseError firebaseError) {
+                                    System.out.println("The read failed: " + firebaseError.getMessage());
+                                }
+                            });
+
+
+
                         }
                     }
                 });
