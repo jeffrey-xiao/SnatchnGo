@@ -4,63 +4,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main" tools:context=".MainActivity">
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="350dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Choose a Location"
-        android:textSize="20dp"
-        android:id="@+id/choose"
-        android:layout_marginTop="98dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="4dp"
+                android:text="Choose a Location"
+                android:textSize="15dp"
+                android:id="@+id/choose"
+                android:layout_centerHorizontal="true"
+                android:background="#f58a8a"
+                android:textColor="@color/white"/>
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="4dp"
+                android:text="Find Close Locations"
+                android:textSize="15dp"
+                android:id="@+id/find"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/orText"
+                android:background="#f58a8a"
+                android:textColor="@color/white" />
+        </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Find Food Services Nearby"
-        android:textSize="20dp"
-        android:typeface="normal"
-        android:id="@+id/find"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/orText"
-        android:background="#f58a8a"
-        android:textColor="@android:color/white"
-        />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="75dp"
+            android:text="My Meal Cart"
+            android:id="@+id/cart"
+            android:background="#f58a8a"
+            android:textColor="@color/white"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="or"
-        android:textAllCaps="false"
-        android:id="@+id/orText"
-        android:layout_below="@+id/choose"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="63dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Meal Cart"
-        android:id="@+id/cart" />
-=======
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-        <!--android:text="or"-->
-        <!--android:textAllCaps="false"-->
-        <!--android:id="@+id/orText"-->
-        <!--android:layout_below="@+id/choose"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="63dp" />-->
->>>>>>> origin/master
 </RelativeLayout>
