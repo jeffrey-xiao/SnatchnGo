@@ -6,28 +6,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
+        android:text="Meal"
+        android:textSize="35dp"
         android:id="@+id/mealsS"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/locationS"
-        android:layout_alignRight="@+id/addtocart"
-        android:layout_alignEnd="@+id/addtocart" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text="Location"
         android:id="@+id/locationS"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
+        android:padding="40dp"
+        android:gravity="center_horizontal"
+        android:text="Description jasdlfkj weoijalsk lsdkfj a;lsdkjf alsdkfj alj hahhhhhhh as;dlkfj aw;ioefasdlkfj asdlkfj a;wlkejf a;sldkfj asdfkl  dfj asd flkwejf lasd;flkj wfkjas dlfkj asld the chicken here is supposed to be really good but who knows tbh ksdjf lakwej flaskdj falkwfj alskdfj "
         android:id="@+id/descriptionS"
+        android:layout_above="@+id/addtocart"
+        android:paddingBottom="20dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -35,8 +40,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add to Cart"
+        android:background="#f58a8a"
+        android:textColor="#ffffff"
         android:id="@+id/addtocart"
+        android:padding="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="69dp" />
+        android:layout_marginBottom="30dp" />
 </RelativeLayout>
