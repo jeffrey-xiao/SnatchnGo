@@ -3,7 +3,10 @@ package refactor.mhacks.snatchngo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +22,7 @@ import com.firebase.client.ValueEventListener;
 /**
  * Created by abc96_000 on 2016-02-20.
  */
-public class MealActivity extends ActionBarActivity {
+public class MealActivity extends BaseActivity {
     public String[] Meal;
     public String[] Descrip;
     ListView mealChoice;
@@ -28,6 +31,8 @@ public class MealActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meal_activity);
         Intent intent = getIntent();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         final int location = Integer.parseInt(intent.getStringExtra("Location"));
         final String lName = intent.getStringExtra("Name");
         final String cat = intent.getStringExtra("Cat");
@@ -77,5 +82,27 @@ public class MealActivity extends ActionBarActivity {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_menu) {
+            Intent intent = new Intent(MealActivity.this,MainActivity.class);
+            setIntent(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

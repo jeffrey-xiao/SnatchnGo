@@ -24,4 +24,5 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
     }
+
 }

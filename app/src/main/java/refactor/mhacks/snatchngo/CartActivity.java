@@ -1,23 +1,29 @@
 package refactor.mhacks.snatchngo;
-
+import com.stripe.android.*;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,17 +31,19 @@ import java.util.Map;
 /**
  * Created by abc96_000 on 2016-02-20.
  */
-public class CartActivity extends ActionBarActivity {
+public class CartActivity extends BaseActivity {
     public String[] Meal;
     public int[] Location;
     public ListView mealChoice;
-
+    public Button checkOut;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_activity);
         TextView t2 = (TextView) findViewById(R.id.titleCart);
         TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         final String number = tm.getLine1Number().substring(1);
         Firebase.setAndroidContext(this);
         Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com/locations");
@@ -107,7 +115,35 @@ public class CartActivity extends ActionBarActivity {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
+        checkOut = (Button) findViewById(R.id.checkout);
+        checkOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_menu) {
+            Intent intent = new Intent(CartActivity.this,MainActivity.class);
+            setIntent(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
+

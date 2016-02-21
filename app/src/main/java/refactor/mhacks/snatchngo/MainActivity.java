@@ -12,12 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActivity {
     Button chooseB,findB, cartB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.content_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         chooseB = (Button) findViewById(R.id.choose);
@@ -61,8 +61,9 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_menu) {
+            Intent intent = new Intent(MainActivity.this,MainActivity.class);
+            setIntent(intent);
         }
 
         return super.onOptionsItemSelected(item);
