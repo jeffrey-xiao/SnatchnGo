@@ -9,11 +9,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Food Locations"
-        android:textColor="#f58a9e"
-        android:textStyle="bold"
-        android:textSize="40dp"
+        android:textSize="35dp"
         android:id="@+id/foodloc"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -21,10 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/locatChoices"
-        
-        android:layout_marginTop="120dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="90dp"/>
 
 </RelativeLayout>
