@@ -15,11 +15,9 @@
         android:padding="16dp"
         android:text="Choose a Cafeteria"
         android:textSize="20dp"
-
         android:id="@+id/choose"
         android:layout_marginTop="98dp"
         android:layout_alignParentTop="true"
-
         android:layout_centerHorizontal="true"/>
 
 
@@ -30,7 +28,6 @@
         android:text="Find Cafeterias Nearby"
         android:textSize="20dp"
         android:typeface="normal"
-
         android:id="@+id/find"
         android:layout_marginTop="57dp"
         android:layout_below="@+id/orText"
@@ -49,4 +46,10 @@
         android:layout_below="@+id/choose"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="63dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Meal Cart"
+        android:id="@+id/cart" />
 </RelativeLayout>

@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 public class MainActivity extends ActionBarActivity {
-    Button chooseB,findB;
+    Button chooseB,findB, cartB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,14 @@ public class MainActivity extends ActionBarActivity {
         });
         findB = (Button) findViewById(R.id.find);
         findB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FindActivity.class);
+                startActivity(intent);
+            }
+        });
+        cartB = (Button) findViewById(R.id.cart);
+        cartB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, FindActivity.class);
