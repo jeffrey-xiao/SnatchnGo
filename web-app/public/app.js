@@ -1,5 +1,10 @@
 var ref = new Firebase('https://snatch-and-go.firebaseio.com/');
-
+var monthNames = [
+  "January", "February", "March",
+  "April", "May", "June", "July",
+  "August", "September", "October",
+  "November", "December"
+];
 var getValue = function (key) {
     if (key == null)
         return false;
@@ -76,7 +81,7 @@ var mod = angular.module('snatch-and-go', ['firebase'])
       },
       template:
         '<table class="inner-table" style="width:100%">' +
-            '<tr ng-repeat="(item, selected) in orderList">' +
+            '<tr ng-repeat="(item, selected) in orderList" style="max-height: 10px;">' +
                 '<td class="right aligned">' + 
                     '<span ng-class="{checked:selected.$value}" id="orderName">{{orderList.$keyAt(item)}}</span>' +
                     '<input type="checkbox" ' +
@@ -96,8 +101,12 @@ function authDataCallback(authData) {
   }
 }
 
-mod.controller("mainController",  function($scope, $http, $firebaseArray, $document) {
-    $scope.table = $firebaseArray(ref);
+function padLeft (nr, n, str){
+    return Array(n-String(nr).length+1).join(str||'0')+nr;
+}
+
+mod.controller("mainController",  function($scope, $http, $firebaseArray, $document, $firebase) {
+    $scope.table = $firebaseArray(ref.orderByChild('time_requested'));
     $scope.loggedIn = false;
     
     $scope.submit = function () {
@@ -121,6 +130,31 @@ mod.controller("mainController",  function($scope, $http, $firebaseArray, $docum
     $scope.logout = function () {
         ref.unauth();
         $scope.loggedIn = false;
+    }
+    
+    $scope.getOrderList = function (orders) {
+        var ret = new Array();
+        for (var key in orders) {
+            if (orders.hasOwnProperty(key) && typeof orders[key].paid != 'undefined') {
+                ret.push({'key':key, 'values':orders[key]});
+                console.log({'key':key, 'values':orders[key]}.values.time_requested);
+            }  
+        }
+        ret.sort(function(a, b) {
+            return String(a.values.time_requested).localeCompare(String(b.values.time_requested));
+        });
+        console.log(ret);
+        return ret;
+    }
+    
+    $scope.formatDate = function (date) {
+        var rawDate = date.split('-');
+        var d = new Date(rawDate[0], rawDate[1], rawDate[2], rawDate[3], rawDate[4], rawDate[5], 0);
+        var day = d.getDate();
+        var monthIndex = d.getMonth() - 1;
+        var hour = d.getHours();
+        var minutes = d.getMinutes();
+        return monthNames[monthIndex] + " " + day + " - " + padLeft(hour, 2)+":"+padLeft(minutes, 2);
     }
 });
 
