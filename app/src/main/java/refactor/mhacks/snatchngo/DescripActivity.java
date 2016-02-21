@@ -55,7 +55,7 @@ public class DescripActivity extends ActionBarActivity {
                 Firebase.setAndroidContext(DescripActivity.this);
                 //Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com/locations/"+(location+1)+"/orders");
                 TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-                final String number = tm.getLine1Number();
+                final String number = tm.getLine1Number().substring(1);
                 final Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com/locations/"+(location+1)+"/orders");
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override

@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
         cartB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FindActivity.class);
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
                 startActivity(intent);
             }
         });

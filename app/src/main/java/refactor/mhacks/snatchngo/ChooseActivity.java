@@ -26,9 +26,18 @@ public class ChooseActivity extends ActionBarActivity {
     public String[] names;
     public int locationCount=0;
     public ListView locationChoice;
+    public Button cart;
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_activity);
+        cart = (Button) findViewById(R.id.cartbutton);
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
         Firebase.setAndroidContext(this);
         Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com");
         ref.addValueEventListener(new ValueEventListener() {
