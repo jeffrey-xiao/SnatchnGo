@@ -76,7 +76,9 @@ public class DescripActivity extends BaseActivity {
                             refff.child(meal).setValue(false);
                             reff.child("phone_number").setValue("7343259651");
                         }
+                        ref.removeEventListener(this);
                         startActivity(intent);
+
                     }
 
                     @Override

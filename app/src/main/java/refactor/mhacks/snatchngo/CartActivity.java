@@ -49,13 +49,13 @@ public class CartActivity extends BaseActivity {
         Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com/locations");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(final DataSnapshot snapshot) {
                 TextView t = (TextView) findViewById(R.id.costTot);
                 int tot = 0;
                 for (int i = 0; i < snapshot.getChildrenCount(); i++) {
-                    if (snapshot.child(""+(i+1)).child("orders").child("" + number).exists()) {
-                        Log.d("ahlkawehg","awjheglakwe");
-                        tot += snapshot.child(""+(i+1)).child("orders").child("" + number).child("items").getChildrenCount();
+                    if (snapshot.child("" + (i + 1)).child("orders").child("" + number).exists()) {
+                        Log.d("ahlkawehg", "awjheglakwe");
+                        tot += snapshot.child("" + (i + 1)).child("orders").child("" + number).child("items").getChildrenCount();
                     }
                 }
                 Meal = new String[tot];
@@ -63,20 +63,20 @@ public class CartActivity extends BaseActivity {
                 double totalCost = 0;
                 int counter = 0;
                 for (int i = 0; i < snapshot.getChildrenCount(); i++) {
-                    if (snapshot.child(""+(i+1)).child("orders").child("" + number).exists()) {
-                        for (DataSnapshot o : snapshot.child(""+(i+1)).child("orders").child("" + number).child("items").getChildren()) {
+                    if (snapshot.child("" + (i + 1)).child("orders").child("" + number).exists()) {
+                        for (DataSnapshot o : snapshot.child("" + (i + 1)).child("orders").child("" + number).child("items").getChildren()) {
                             Meal[counter] = (String) o.getKey();
-                            Location[counter]=i;
-                            for (DataSnapshot k : snapshot.child(""+(i+1)).child("categories").getChildren()) {
+                            Location[counter] = i;
+                            for (DataSnapshot k : snapshot.child("" + (i + 1)).child("categories").getChildren()) {
                                 if (k.child(Meal[counter]).exists()) {
                                     totalCost += (double) k.child(Meal[counter]).child("cost").getValue();
-                                    }
+                                }
                             }
                             counter++;
                         }
                     }
                 }
-                Log.d("debug",counter+" "+tot);
+                Log.d("debug", counter + " " + tot);
                 mealChoice = (ListView) findViewById(R.id.cartList);
                 ArrayAdapter<String> adapterCat = new ArrayAdapter<String>(CartActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, Meal);
                 mealChoice.setAdapter(adapterCat);
@@ -93,12 +93,12 @@ public class CartActivity extends BaseActivity {
                                                                           Firebase REF = new Firebase("https://snatch-and-go.firebaseio.com/locations/"+(Location[POS]+1)+"/orders/"+number+"/items");
                                                                           Map<String, Object> nickname = new HashMap<String, Object>();
 
-                                                                          nickname.put(Meal[POS], null);
-                                                                          REF.updateChildren(nickname);
+
+                                                                          REF.child(Meal[POS]).setValue(null);
 
                                                                           Log.d("debug","yess");
-                                                                          Intent intent = new Intent(CartActivity.this,CartActivity.class);
-                                                                          setIntent(intent);
+                                                                          //Intent intent = new Intent(CartActivity.this,CartActivity.class);
+                                                                          //setIntent(intent);
 
                                                                       }
                                                                   })
@@ -108,6 +108,17 @@ public class CartActivity extends BaseActivity {
                                                   }
                 );
                 t.setText("$" + Math.round(totalCost));
+                checkOut = (Button) findViewById(R.id.completeTransaction);
+                checkOut.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(CartActivity.this, "Purchase Successful", Toast.LENGTH_SHORT).show();
+                        for (int i=0;i<snapshot.getChildrenCount();i++){
+                            Firebase REF = new Firebase("https://snatch-and-go.firebaseio.com/locations/" + (i+1) + "/orders/" + number);
+                            REF.setValue(null);
+                        }
+                    }
+                });
             }
 
             @Override
@@ -115,13 +126,7 @@ public class CartActivity extends BaseActivity {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
-        checkOut = (Button) findViewById(R.id.checkout);
-        checkOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

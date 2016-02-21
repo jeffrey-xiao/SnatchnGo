@@ -30,18 +30,11 @@ public class ChooseActivity extends BaseActivity{
     public String[] names;
     public int locationCount=0;
     public ListView locationChoice;
-    public Button cart;
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_activity);
-        cart = (Button) findViewById(R.id.cartbutton);
-        cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ChooseActivity.this, CartActivity.class);
-                startActivity(intent);
-            }
-        });
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Firebase.setAndroidContext(this);
