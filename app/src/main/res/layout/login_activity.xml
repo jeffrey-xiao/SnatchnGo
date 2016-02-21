@@ -2,41 +2,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Email"
-        android:textSize="16dp"
-        android:layout_toLeftOf="@+id/email"
-        android:padding="20dp"/>
+        android:orientation="vertical"
+        android:layout_marginTop="150dp">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Please enter your login information."
+            android:gravity="center_horizontal"
+            android:textSize="15dp"
+            android:layout_marginBottom="10dp"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:id="@+id/emailDesc"
+                android:textSize="16dp"
+                android:padding="20dp"
+                />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Password"
-        android:textSize="16dp"
-        android:layout_toLeftOf="@+id/pass"
-        android:padding="20dp"
-        />
+            <EditText
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/pass" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/pass"
-        android:layout_centerVertical="true"/>
+        </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/email"
-        android:layout_above="@+id/pass"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="53dp" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:orintation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:gravity="center_horizontal"
+                android:id="@+id/passDesc"
+                android:paddingLeft="5dp"
+                android:textSize="16dp"
+                />
+
+            <EditText
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/email"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
 
     <Button
         android:layout_width="wrap_content"
@@ -48,5 +76,5 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:padding="20dp"
-        android:layout_marginBottom="70dp"/>
+        android:layout_marginBottom="40dp"/>
 </RelativeLayout>
