@@ -2,33 +2,48 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="My Meal Cart"
-        android:id="@+id/titleCart"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="64dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="67dp" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cartList"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="47dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="35dp"
+            android:padding="20dp"
+            android:text="My Meal Cart"
+            android:id="@+id/titleCart"
+            android:layout_alignParentTop="true"
+            android:gravity="center_horizontal"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Cost"
-        android:id="@+id/costTot"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="315dp"
+            android:id="@+id/cartList"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Cost"
+            android:id="@+id/costTot"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/completeTransaction"
+            android:text="Continue to Transaction"
+            android:background="#f58a8a"
+            android:textColor="@color/white"
+            android:padding="15dp"
+            android:layout_alignParentBottom="true"/>
+    </LinearLayout>
+
 </RelativeLayout>
