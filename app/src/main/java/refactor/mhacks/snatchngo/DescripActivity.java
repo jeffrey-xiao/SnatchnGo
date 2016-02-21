@@ -35,12 +35,15 @@ public class DescripActivity extends ActionBarActivity {
         final String lName = intent.getStringExtra("Name");
         final String meal = intent.getStringExtra("Meal");
         final String descrip = intent.getStringExtra("Descrip");
+        final String cost = intent.getStringExtra("Cost");
         TextView t = (TextView) findViewById(R.id.mealsS);
         t.setText(meal);
         TextView t2 = (TextView) findViewById(R.id.locationS);
         t2.setText(lName);
         TextView t3 = (TextView) findViewById(R.id.descriptionS);
         t3.setText(descrip);
+        TextView t4 = (TextView) findViewById(R.id.costView);
+        t4.setText("$"+cost);
 
         addTo = (Button) findViewById(R.id.addtocart);
         addTo.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +63,7 @@ public class DescripActivity extends ActionBarActivity {
                         if (snapshot.child("" + number).exists()) {
                             //already bought something
                             HashMap<String, Object> childchild = new HashMap<String, Object>();
-                            childchild.put(meal,false);
+                            childchild.put(meal, false);
                             ref.child("" + number).child("items").updateChildren(childchild);
                         } else {
                             Firebase reff = ref.child("" + number);

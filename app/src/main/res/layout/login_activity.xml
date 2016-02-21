@@ -13,8 +13,7 @@
             android:text="Please enter your login information."
             android:gravity="center_horizontal"
             android:textSize="15dp"
-            android:layout_marginBottom="15dp"/>
-
+            android:layout_marginBottom="10dp"/>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

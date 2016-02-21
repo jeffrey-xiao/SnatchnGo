@@ -23,6 +23,7 @@ public class MealActivity extends ActionBarActivity {
     public String[] Meal;
     public String[] Descrip;
     ListView mealChoice;
+    public double[] Costs;
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meal_activity);
@@ -43,10 +44,12 @@ public class MealActivity extends ActionBarActivity {
                 int len = (int) snapshot.child("locations/" + (location + 1) + "/categories/"+cat).getChildrenCount();
                 Meal = new String[len];
                 Descrip = new String[len];
+                Costs = new double[len];
                 int counter = 0;
                 for (DataSnapshot o : snapshot.child("locations/" + (location + 1) + "/categories/"+cat).getChildren()) {
                     Meal[counter] = o.getKey();
-                    Descrip[counter++] = (String) o.child("description").getValue();
+                    Descrip[counter] = (String) o.child("description").getValue();
+                    Costs[counter++] = (double)o.child("cost").getValue();
                 }
                 mealChoice = (ListView) findViewById(R.id.mealsView);
                 ArrayAdapter<String> adapterCat = new ArrayAdapter<String>(MealActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, Meal);
@@ -60,6 +63,7 @@ public class MealActivity extends ActionBarActivity {
                                                               Intent intent = new Intent(MealActivity.this, DescripActivity.class);
                                                               intent.putExtra("Meal", mealString);
                                                               intent.putExtra("Location", location + "");
+                                                              intent.putExtra("Cost",Costs[position]+"");
                                                               intent.putExtra("Name", lName);
                                                               intent.putExtra("Descrip",Descrip[position]);
                                                               startActivity(intent);
