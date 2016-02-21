@@ -19,6 +19,9 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by abc96_000 on 2016-02-20.
  */
@@ -33,7 +36,7 @@ public class CartActivity extends ActionBarActivity {
         setContentView(R.layout.cart_activity);
         TextView t2 = (TextView) findViewById(R.id.titleCart);
         TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-        final String number = tm.getLine1Number();
+        final String number = tm.getLine1Number().substring(1);
         Firebase.setAndroidContext(this);
         Firebase ref = new Firebase("https://snatch-and-go.firebaseio.com/locations");
         ref.addValueEventListener(new ValueEventListener() {
@@ -78,13 +81,16 @@ public class CartActivity extends ActionBarActivity {
                                                                   .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                                       @Override
                                                                       public void onClick(DialogInterface dialog, int which) {
-                                                                          Log.d("debug","https://snatch-and-go.firebaseio.com/locations/"+(Location[POS]+1)+"/orders/"+number.replace("+","%2B")+"/items/"+Meal[POS].replace(" ","%20"));
-                                                                          Firebase REF = new Firebase("https://snatch-and-go.firebaseio.com/locations/"+(Location[POS]+1)+"/orders/"+number.replace("+","%2B")+"/items/"+Meal[POS].replace(" ","%20"));
-                                                                          REF.setValue(null);
-                                                                          REF.removeValue();
+                                                                          Log.d("debug", "https://snatch-and-go.firebaseio.com/locations/" + (Location[POS] + 1) + "/orders/" + number + "/items");
+                                                                          Firebase REF = new Firebase("https://snatch-and-go.firebaseio.com/locations/"+(Location[POS]+1)+"/orders/"+number+"/items");
+                                                                          Map<String, Object> nickname = new HashMap<String, Object>();
+
+                                                                          nickname.put(Meal[POS], null);
+                                                                          REF.updateChildren(nickname);
+
                                                                           Log.d("debug","yess");
-                                                                          finish();
-                                                                          startActivity(getIntent());
+                                                                          Intent intent = new Intent(CartActivity.this,CartActivity.class);
+                                                                          setIntent(intent);
 
                                                                       }
                                                                   })
