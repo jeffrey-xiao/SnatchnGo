@@ -18,7 +18,7 @@ To miss class or miss a meal, that is the question! Or rather, that is the probl
 - Android SDK for mobile platform
 - ArcGIS API for maps
 - Cobalt API for location data
-- Node.js and Anugular.js for food providers' web platform
+- Node.js and Angular.js for food providers' web platform
 - Twilio for automatically sent SMS messages
 
 #### Challenges
