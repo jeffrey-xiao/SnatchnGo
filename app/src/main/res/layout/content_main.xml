@@ -7,62 +7,62 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main" tools:context=".MainActivity">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-            <ImageView
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/imageView1"
-                android:src="@drawable/Logo"
-                android:padding="20dp"
-                android:layout_margin="20dp"/>
-            <LinearLayout
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/imageView1"
+            android:src="@drawable/logo"
+            android:padding="20dp"
+            android:layout_margin="20dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:layout_margin="4dp"
-                    android:text="Choose Location"
-                    android:textSize="15dp"
-                    android:id="@+id/choose"
-                    android:layout_centerHorizontal="true"
-                    android:background="#f58a8a"
-                    android:textColor="@color/white"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:layout_margin="4dp"
-                    android:text="Find Food Nearby"
-                    android:textSize="15dp"
-                    android:id="@+id/find"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/orText"
-                    android:background="#f58a8a"
-                    android:textColor="@color/white" />
-            </LinearLayout>
+                android:padding="15dp"
+                android:layout_margin="4dp"
+                android:text="Choose Location"
+                android:textSize="15dp"
+                android:id="@+id/choose"
+                android:layout_centerHorizontal="true"
+                android:background="#f58a8a"
+                android:textColor="@color/white"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:text="Your Meal Cart"
-                android:id="@+id/cart"
                 android:padding="15dp"
-                android:layout_margin="20dp"
+                android:layout_margin="4dp"
+                android:text="Find Food Nearby"
+                android:textSize="15dp"
+                android:id="@+id/find"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/orText"
                 android:background="#f58a8a"
-                android:textColor="@color/white"/>
-
+                android:textColor="@color/white" />
         </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:text="Your Meal Cart"
+            android:id="@+id/cart"
+            android:padding="15dp"
+            android:layout_margin="20dp"
+            android:background="#f58a8a"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
