@@ -138,8 +138,10 @@ public class CartActivity extends BaseActivity {
                                     Firebase REF2 = new Firebase("https://snatch-and-go.firebaseio.com/locations/" + (ii + 1) + "/orders/" + number);
                                     REF2.setValue(snapshot.getValue());
                                     REF2.child("paid").setValue(true);
-                                    formattedDate.replace(":","-");
-                                    formattedDate.replace(" ","-");
+                                    REF2.child("items").setValue(snapshot.child("items").getValue());
+                                    formattedDate = formattedDate.replace(":","-");
+                                    formattedDate = formattedDate.replace(" ","-");
+                                    REF2.child("name").setValue("Diana Chang");
                                     REF2.child("time_requested").setValue(formattedDate);
                                     REF.setValue(null);
                                     REF.removeEventListener(this);
