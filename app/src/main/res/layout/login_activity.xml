@@ -12,11 +12,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/imageView1"
-<<<<<<< HEAD
             android:src="@drawable/logo"
-=======
-            android:src="@drawable/Logo"
->>>>>>> 23682d082d913576a7bc27f1a2a595d6e180b711
             android:padding="20dp"
             android:layout_margin="20dp"/>
 
